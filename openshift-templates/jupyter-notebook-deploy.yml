@@ -1,0 +1,147 @@
+kind: Template
+apiVersion: v1
+metadata:
+  name: deploy-simple-http-container
+  annotations:
+    openshift.io/display-name: HTTP App Deploy Template
+    description: A template to deploy your an App with a HTTP endpoint
+    iconClass: icon-cube
+    tags: http
+objects:
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    labels:
+      app: "${NAME}"
+    name: "${NAME}"
+  spec: 
+    tags:
+    - name: latest
+      from:
+        kind: DockerImage
+        name: "${CONTAINER_IMAGE_SOURCE}" 
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      name: "${NAME}"
+      app: "${NAME}"
+    name: "${NAME}"
+  spec:
+    ports:
+    - name: 8888-tcp
+      port: 8888
+      protocol: TCP
+      targetPort: 8888
+    selector:
+      deploymentconfig: "${NAME}"
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      app: ${NAME}
+    name: ${NAME}
+  spec:
+    replicas: 1
+    selector:
+      app: ${NAME}
+      deploymentconfig: ${NAME}
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: ${NAME}
+          deploymentconfig: ${NAME}
+      spec:
+        containers:
+        - image: ${NAME}
+          imagePullPolicy: Always
+          name: ${NAME}
+          ports:
+          - containerPort: 8888
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          env:
+          - name: JUPYTER_NOTEBOOK_PASSWORD
+            value: ${PASSWORD}
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - ${NAME}
+        from:
+          kind: ImageStreamTag
+          name: ${NAME}:latest
+      type: ImageChange
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: 2017-12-16T00:36:13Z
+      lastUpdateTime: 2017-12-16T00:36:13Z
+      message: Deployment config has minimum availability.
+      status: "True"
+      type: Available
+    - lastTransitionTime: 2017-12-16T00:36:07Z
+      lastUpdateTime: 2017-12-16T00:36:14Z
+      message: replication controller "jupyter-notebook-demo-1" successfully rolled
+        out
+      reason: NewReplicationControllerAvailable
+      status: "True"
+      type: Progressing
+    details:
+      causes:
+      - imageTrigger:
+          from:
+            kind: ImageStreamTag
+            name: jupyter-notebook-demo:latest
+            namespace: labs-big-data
+        type: ImageChange
+      message: image change
+    latestVersion: 1
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    unavailableReplicas: 0
+    updatedReplicas: 1
+parameters:
+- name: NAME
+  displayName: Name
+  description: The name assigned to all objects and the related imagestream.
+  required: true
+- name: CONTAINER_IMAGE_SOURCE
+  displayName: Container Image Source
+  description: The source of the container image
+  required: true
+- name: CONTAINER_IMAGE_TAG
+  displayName: Container Image Tag
+  description: The tag for the container image
+  required: true  
+  value: latest  
+- name: PASSWORD
+  displayName: Jupyter Notebook Password
+  description: The password for the deployed Jupyter Notebook
+  required: true  
+  value: developer    
+labels:
+  template: deploy-simply-http-app

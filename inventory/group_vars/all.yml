@@ -1,0 +1,72 @@
+---
+openshift_cluster_content:
+- object: projectrequest
+  content:
+  - name: big-data-project
+    template: "https://raw.githubusercontent.com/redhat-cop/cluster-lifecycle/master/files/projectrequest/template.yml"
+    params: "{{ inventory_dir }}/../params/projectrequests/big-data"
+    tags:
+    - projects
+- object: radanalytics
+  content:
+  - name: radanalytics-latest-resources
+    file: "https://radanalytics.io/resources.yaml"
+    namespace: labs-big-data
+    tags:
+    - radanalytics 
+  - name: java-spring-spark-demo-app
+    template: "labs-big-data//oshinko-java-spark-build-dc"
+    params: "{{ inventory_dir }}/../params/radanalytics/java-spring-spark-demo-app"
+    namespace: labs-big-data
+    tags:
+    - radanalytics
+    - java
+  - name: java-spring-spark-demo-route
+    template: "{{ inventory_dir }}/../openshift-templates/route.yml"
+    params: "{{ inventory_dir }}/../params/radanalytics/java-spring-spark-demo-route"
+    namespace: labs-big-data
+    tags:
+    - radanalytics
+    - java
+    - route
+  - name: python-flask-spark-demo-app
+    template: "labs-big-data//oshinko-pyspark-build-dc"
+    params: "{{ inventory_dir }}/../params/radanalytics/python-flask-spark-demo-app"
+    namespace: labs-big-data
+    tags:
+    - radanalytics
+    - python
+  - name: python-flask-spark-demo-route
+    template: "{{ inventory_dir }}/../openshift-templates/route.yml"
+    params: "{{ inventory_dir }}/../params/radanalytics/python-flask-spark-demo-route"
+    namespace: labs-big-data
+    tags:
+    - radanalytics
+    - python
+    - route
+  - name: jupyter-notebook-demo-app
+    template: "{{ inventory_dir }}/../openshift-templates/jupyter-notebook-deploy.yml"
+    params: "{{ inventory_dir }}/../params/radanalytics/jupyter-notebook-demo-app"
+    namespace: labs-big-data
+    tags:
+    - radanalytics
+    - jupyter
+  - name: jupyter-notebook-demo-route
+    template: "{{ inventory_dir }}/../openshift-templates/route.yml"
+    params: "{{ inventory_dir }}/../params/radanalytics/jupyter-notebook-demo-route"
+    namespace: labs-big-data
+    tags:
+    - radanalytics
+    - jupyter
+    - route
+
+
+
+  # fails with https://github.com/radanalyticsio/oshinko-s2i/issues/157
+  # - name: deploy-oshinko-secure-webui
+  #   template: "labs-big-data//oshinko-webui"
+  #   params: "{{ inventory_dir }}/../params/radanalytics/oshinko-secure-webui"
+  #   namespace: labs-big-data
+  #   tags:
+  #   - radanalytics
+  #   - oshinko

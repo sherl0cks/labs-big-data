@@ -1,2 +1,2 @@
-APPLICATION_NAME=python-flask-spark-demo
+APPLICATION_NAME=radanalytics-python-demo
 GIT_URI=https://github.com/radanalyticsio/tutorial-sparkpi-python-flask.git

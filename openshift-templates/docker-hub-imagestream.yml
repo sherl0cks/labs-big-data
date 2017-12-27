@@ -1,0 +1,28 @@
+kind: Template
+apiVersion: v1
+metadata:
+  name: dockerhub-imagestream
+  annotations:
+    openshift.io/display-name: Docker Hub ImageStream
+objects:
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    labels:
+      app: "${NAME}"
+    name: "${NAME}"
+  spec: 
+    tags:
+    - name: latest
+      from:
+        kind: DockerImage
+        name: "${CONTAINER_IMAGE_SOURCE}"
+parameters:
+- name: NAME
+  displayName: Name
+  description: The name assigned to all objects and the related imagestream.
+  required: true
+- name: CONTAINER_IMAGE_SOURCE
+  displayName: Container Image Source
+  description: The source of the container image
+  required: true

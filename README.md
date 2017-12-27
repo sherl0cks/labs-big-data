@@ -20,14 +20,21 @@ There is ansible inventory which identifies all components to be deployed to an 
 
 Currently, the following components are included in this inventory:
 
-* The radanalytics.io getting started resources: https://radanalytics.io/get-started 
-* Jupyter Notebook Demo: https://radanalytics.io/examples/var
-  * note: this deploy is single tenant - i.e. each user needs their own notebook deployed
-* Java/Spring Spark Demo: https://radanalytics.io/assets/my-first-radanalytics-app/sparkpi-java-spring.html
-* Python/Flask Spark Demo: https://radanalytics.io/assets/my-first-radanalytics-app/sparkpi-python-flask.html
+* Resources from radanalytics.io 
+  * [Generic OpenShift templates](https://radanalytics.io/get-started) 
+  * [Jupyter Notebook Demo - PySpark 2](https://radanalytics.io/examples/var) 
+    * note: this deploy is single tenant - i.e. each user needs their own notebook deployed. work on Jupyter Hub will resolve this
+  * [Java/Spring Spark Demo](https://radanalytics.io/assets/my-first-radanalytics-app/sparkpi-java-spring.html) & [Python/Flask Spark Demo](https://radanalytics.io/assets/my-first-radanalytics-app/sparkpi-python-flask.html), both of which do the following, just using different languages/frameworks:
+    * dynamically spin up a Spark cluster (via Oshinko CLI) when the app boots in OpenShift
+    * create a Spark session on the new cluster and calculate `Pi`
+* Explorations from Justin Holmes
+  * [Jupyter PySpark 3](https://github.com/sherl0cks/jupyter-notebook-py3.5)
+    * this is a temporary build until https://github.com/radanalyticsio/base-notebook/issues/12 is resolved
+    
+
 
 TODO
-* Oshinko WebUI: https://github.com/radanalyticsio/oshinko-s2i/issues/157
+* Oshinko WebUI, which currently [does not work with `oc apply`](https://github.com/radanalyticsio/oshinko-s2i/issues/157)
 
 ## Prerequisites
 

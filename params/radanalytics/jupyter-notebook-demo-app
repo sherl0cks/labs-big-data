@@ -1,2 +1,0 @@
-NAME=jupyter-notebook-demo
-CONTAINER_IMAGE_SOURCE=radanalyticsio/workshop-notebook

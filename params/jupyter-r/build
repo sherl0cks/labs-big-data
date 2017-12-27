@@ -1,0 +1,2 @@
+NAME=jupyter-r
+CONTAINER_IMAGE_SOURCE=jupyter/r-notebook:latest

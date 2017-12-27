@@ -9,18 +9,6 @@ metadata:
     tags: http
 objects:
 - apiVersion: v1
-  kind: ImageStream
-  metadata:
-    labels:
-      app: "${NAME}"
-    name: "${NAME}"
-  spec: 
-    tags:
-    - name: latest
-      from:
-        kind: DockerImage
-        name: "${CONTAINER_IMAGE_SOURCE}" 
-- apiVersion: v1
   kind: Service
   metadata:
     labels:
@@ -94,54 +82,33 @@ objects:
           kind: ImageStreamTag
           name: ${NAME}:latest
       type: ImageChange
-  status:
-    availableReplicas: 1
-    conditions:
-    - lastTransitionTime: 2017-12-16T00:36:13Z
-      lastUpdateTime: 2017-12-16T00:36:13Z
-      message: Deployment config has minimum availability.
-      status: "True"
-      type: Available
-    - lastTransitionTime: 2017-12-16T00:36:07Z
-      lastUpdateTime: 2017-12-16T00:36:14Z
-      message: replication controller "jupyter-notebook-demo-1" successfully rolled
-        out
-      reason: NewReplicationControllerAvailable
-      status: "True"
-      type: Progressing
-    details:
-      causes:
-      - imageTrigger:
-          from:
-            kind: ImageStreamTag
-            name: jupyter-notebook-demo:latest
-            namespace: labs-big-data
-        type: ImageChange
-      message: image change
-    latestVersion: 1
-    observedGeneration: 3
-    readyReplicas: 1
-    replicas: 1
-    unavailableReplicas: 0
-    updatedReplicas: 1
+- apiVersion: v1
+  kind: Route
+  metadata:
+    labels:
+      app: ${NAME}
+      application: ${NAME}
+    name: ${NAME}
+  spec:
+    port:
+      targetPort: ${TARGET_PORT}
+    to:
+      kind: Service
+      name: ${NAME}
+      weight: 100
+    wildcardPolicy: None    
 parameters:
 - name: NAME
   displayName: Name
   description: The name assigned to all objects and the related imagestream.
   required: true
-- name: CONTAINER_IMAGE_SOURCE
-  displayName: Container Image Source
-  description: The source of the container image
-  required: true
-- name: CONTAINER_IMAGE_TAG
-  displayName: Container Image Tag
-  description: The tag for the container image
-  required: true  
-  value: latest  
 - name: PASSWORD
   displayName: Jupyter Notebook Password
   description: The password for the deployed Jupyter Notebook
   required: true  
-  value: developer    
-labels:
-  template: deploy-simply-http-app
+  value: developer
+- description: The service port to route traffic.
+  displayName: target Port
+  name: TARGET_PORT
+  required: true
+  value: 8888-tcp

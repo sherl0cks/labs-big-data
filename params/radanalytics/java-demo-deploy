@@ -1,3 +1,3 @@
-APPLICATION_NAME=java-spring-spark-demo
+APPLICATION_NAME=radanalytics-java-demo
 GIT_URI=https://github.com/radanalyticsio/spring-sparkpi
 APP_FILE=SparkPiBoot-0.0.1-SNAPSHOT.jar

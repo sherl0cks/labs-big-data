@@ -1,2 +1,0 @@
-APPLICATION_NAME=jupyter-notebook-demo
-TARGET_PORT=8888-tcp

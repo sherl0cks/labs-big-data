@@ -16,14 +16,14 @@ openshift_cluster_content:
     - radanalytics 
   - name: java-spring-spark-demo-app
     template: "labs-big-data//oshinko-java-spark-build-dc"
-    params: "{{ inventory_dir }}/../params/radanalytics/java-spring-spark-demo-app"
+    params: "{{ inventory_dir }}/../params/radanalytics/java-demo-deploy"
     namespace: labs-big-data
     tags:
     - radanalytics
     - java
   - name: java-spring-spark-demo-route
     template: "{{ inventory_dir }}/../openshift-templates/route.yml"
-    params: "{{ inventory_dir }}/../params/radanalytics/java-spring-spark-demo-route"
+    params: "{{ inventory_dir }}/../params/radanalytics/java-demo-route"
     namespace: labs-big-data
     tags:
     - radanalytics
@@ -31,35 +31,59 @@ openshift_cluster_content:
     - route
   - name: python-flask-spark-demo-app
     template: "labs-big-data//oshinko-pyspark-build-dc"
-    params: "{{ inventory_dir }}/../params/radanalytics/python-flask-spark-demo-app"
+    params: "{{ inventory_dir }}/../params/radanalytics/python-demo-deploy"
     namespace: labs-big-data
     tags:
     - radanalytics
     - python
   - name: python-flask-spark-demo-route
     template: "{{ inventory_dir }}/../openshift-templates/route.yml"
-    params: "{{ inventory_dir }}/../params/radanalytics/python-flask-spark-demo-route"
+    params: "{{ inventory_dir }}/../params/radanalytics/python-demo-route"
     namespace: labs-big-data
     tags:
     - radanalytics
     - python
     - route
-  - name: jupyter-notebook-demo-app
+  - name: jupyter-notebook-demo-imagestream
+    template: "{{ inventory_dir }}/../openshift-templates/docker-hub-imagestream.yml"
+    params: "{{ inventory_dir }}/../params/radanalytics/jupyter-demo-imagestream"
+    namespace: labs-big-data
+    tags:
+    - radanalytics
+    - jupyter-pyspark2
+  - name: jupyter-notebook-demo-deploy
     template: "{{ inventory_dir }}/../openshift-templates/jupyter-notebook-deploy.yml"
-    params: "{{ inventory_dir }}/../params/radanalytics/jupyter-notebook-demo-app"
+    params: "{{ inventory_dir }}/../params/radanalytics/jupyter-demo-deploy"
     namespace: labs-big-data
     tags:
     - radanalytics
-    - jupyter
-  - name: jupyter-notebook-demo-route
-    template: "{{ inventory_dir }}/../openshift-templates/route.yml"
-    params: "{{ inventory_dir }}/../params/radanalytics/jupyter-notebook-demo-route"
+    - jupyter-pyspark2  
+- object: holmes-exploration
+  content:  
+  - name: jupyter-pyspark-3-build
+    template: "{{ inventory_dir }}/../openshift-templates/docker-build.yml"
+    params: "{{ inventory_dir }}/../params/jupyter-pyspark3/build"
     namespace: labs-big-data
     tags:
-    - radanalytics
-    - jupyter
-    - route
-
+    - jupyter-pyspark3
+  - name: jupyter-pyspark-3-deploy
+    template: "{{ inventory_dir }}/../openshift-templates/jupyter-notebook-deploy.yml"
+    params: "{{ inventory_dir }}/../params/jupyter-pyspark3/deploy"
+    namespace: labs-big-data
+    tags:
+    - jupyter-pyspark3
+  - name: jupyter-r-imagestream
+    template: "{{ inventory_dir }}/../openshift-templates/docker-hub-imagestream.yml"
+    params: "{{ inventory_dir }}/../params/jupyter-r/build"
+    namespace: labs-big-data
+    tags:
+    - jupyter-r
+  - name: jupyter-r-deploy
+    template: "{{ inventory_dir }}/../openshift-templates/jupyter-notebook-deploy.yml"
+    params: "{{ inventory_dir }}/../params/jupyter-r/deploy"
+    namespace: labs-big-data
+    tags:
+    - jupyter-r
 
 
   # fails with https://github.com/radanalyticsio/oshinko-s2i/issues/157

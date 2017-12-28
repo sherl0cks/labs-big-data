@@ -1,0 +1,163 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "customer": "health insurance",
+                "enagementType": "roadtrip",
+                "engagementFocus": "application CI/CD",
+                "facilityType": "popup",
+                "facility": "WeWork",
+                "technologies": "OpenShift, AWS, Ansible, Jenkins, Hoverfly, CloudForms"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    40.70546730708014,
+                    -74.013811647892
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "customer": "Red Hat IT",
+                "facilityType": "red hat"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    35.77535757195154,
+                    -78.6370575428009
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "customer": "Optum",
+                "facilityType": "customer"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    44.85550374254259,
+                    -93.46858978271484
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "customer": "health care",
+                "facilityType": "popup"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    43.64899449575356,
+                    -79.37999725341797
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "customer": "EasierAG",
+                "facilityType": "red hat"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    52.2433928844813,
+                    -7.1624556183815
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "customer": "Motability Operations Ltd",
+                "facilityType": "red hat"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    51.509725721292945,
+                    -0.08523792028427123
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "customer": "Finance",
+                "facilityType": "customer"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    48.854663375732876,
+                    2.346525192260742
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "customer": "Energy",
+                "facilityType": "customer"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    51.407371138743805,
+                    -0.41130065917968744
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "customer": "Elisa",
+                "facilityType": "popup"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    60.166108948753305,
+                    24.936904907226562
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "customer": "Finance",
+                "facilityType": "?"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -27.56154742327659,
+                    151.95310592651367
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "customer": "?",
+                "facilityType": "red hat"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.2757516630036478,
+                    103.8472929596901
+                ]
+            }
+        }
+    ]
+}

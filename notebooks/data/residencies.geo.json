@@ -9,7 +9,7 @@
                 "residencyFocus": "application CI/CD",
                 "facilityType": "pop-up",
                 "facility": "WeWork",
-                "technologies": "OpenShift, AWS, Ansible, Jenkins, Hoverfly, CloudForms"
+                "technologies": "OpenShift, AWS, Ansible, Jenkins, Hoverfly, CloudForms and PHP"
             },
             "geometry": {
                 "type": "Point",

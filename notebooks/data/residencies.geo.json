@@ -4,10 +4,10 @@
         {
             "type": "Feature",
             "properties": {
-                "customer": "health insurance",
-                "enagementType": "roadtrip",
-                "engagementFocus": "application CI/CD",
-                "facilityType": "popup",
+                "customer": "A Health Insurer",
+                "residencyType": "Road Trip",
+                "residencyFocus": "application CI/CD",
+                "facilityType": "pop-up",
                 "facility": "WeWork",
                 "technologies": "OpenShift, AWS, Ansible, Jenkins, Hoverfly, CloudForms"
             },
@@ -23,7 +23,8 @@
             "type": "Feature",
             "properties": {
                 "customer": "Red Hat IT",
-                "facilityType": "red hat"
+                "facilityType": "Red Hat",
+                "residencyType": "Disrupt"
             },
             "geometry": {
                 "type": "Point",
@@ -37,7 +38,8 @@
             "type": "Feature",
             "properties": {
                 "customer": "Optum",
-                "facilityType": "customer"
+                "facilityType": "customer",
+                "residencyType": "Transform"
             },
             "geometry": {
                 "type": "Point",
@@ -50,8 +52,9 @@
         {
             "type": "Feature",
             "properties": {
-                "customer": "health care",
-                "facilityType": "popup"
+                "customer": "A Health Care Entity",
+                "facilityType": "pop-up",
+                "residencyType": "Disrupt"
             },
             "geometry": {
                 "type": "Point",
@@ -65,7 +68,8 @@
             "type": "Feature",
             "properties": {
                 "customer": "EasierAG",
-                "facilityType": "red hat"
+                "facilityType": "Red Hat",
+                "residencyType": "Disrupt"
             },
             "geometry": {
                 "type": "Point",
@@ -79,7 +83,8 @@
             "type": "Feature",
             "properties": {
                 "customer": "Motability Operations Ltd",
-                "facilityType": "red hat"
+                "facilityType": "Red Hat",
+                "residencyType": "Disrupt"
             },
             "geometry": {
                 "type": "Point",
@@ -93,7 +98,8 @@
             "type": "Feature",
             "properties": {
                 "customer": "Finance",
-                "facilityType": "customer"
+                "facilityType": "customer",
+                "residencyType": "Disrupt"
             },
             "geometry": {
                 "type": "Point",
@@ -107,7 +113,8 @@
             "type": "Feature",
             "properties": {
                 "customer": "Energy",
-                "facilityType": "customer"
+                "facilityType": "customer",
+                "residencyType": "Disrupt"
             },
             "geometry": {
                 "type": "Point",
@@ -121,7 +128,8 @@
             "type": "Feature",
             "properties": {
                 "customer": "Elisa",
-                "facilityType": "popup"
+                "facilityType": "Road Trip",
+                "residencyType": "Disrupt"
             },
             "geometry": {
                 "type": "Point",
@@ -135,7 +143,8 @@
             "type": "Feature",
             "properties": {
                 "customer": "Finance",
-                "facilityType": "?"
+                "facilityType": "?",
+                "residencyType": "Disrupt"
             },
             "geometry": {
                 "type": "Point",
@@ -148,8 +157,9 @@
         {
             "type": "Feature",
             "properties": {
-                "customer": "?",
-                "facilityType": "red hat"
+                "customer": "An Employment Service",
+                "facilityType": "Red Hat",
+                "residencyType": "Disrupt"
             },
             "geometry": {
                 "type": "Point",

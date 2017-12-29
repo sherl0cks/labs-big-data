@@ -1,0 +1,11 @@
+#!/bin/bash                                                                                                                                                              
+                                                                                                                                                                         
+mkdir /tmp/geoserver                                                                                                                                                     
+cd /tmp/geoserver        
+echo "=== downloading geoserver war distribution"                                                                                                                                                
+curl -L -O http://sourceforge.net/projects/geoserver/files/GeoServer/2.12.1/geoserver-2.12.1-war.zip                                                                     
+unzip geoserver-2.12.1-war.zip                                                                                                                                           
+echo "=== moving geoserver.war to ROOT.war in deployments directory and displaying the result"                                                                               
+mv geoserver.war $JBOSS_HOME/standalone/deployments/ROOT.war                                                                                                             
+ls -alh $JBOSS_HOME/standalone/deployments/                                                                                                                                   
+echo -e  "=== cleaning up tmp"

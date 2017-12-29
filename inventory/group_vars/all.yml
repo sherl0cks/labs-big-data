@@ -84,6 +84,12 @@ openshift_cluster_content:
     namespace: labs-big-data
     tags:
     - jupyter-r
+  - name: geoserver
+    template: "{{ inventory_dir }}/../openshift-templates/http-app-s2i-build-and-deploy.yml"
+    params: "{{ inventory_dir }}/../params/geoserver/buildAndDeploy"
+    namespace: labs-big-data
+    tags:
+    - geoserver
 
 
   # fails with https://github.com/radanalyticsio/oshinko-s2i/issues/157

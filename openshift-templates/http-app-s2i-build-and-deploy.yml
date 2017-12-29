@@ -1,0 +1,160 @@
+---
+kind: Template
+apiVersion: v1
+metadata:
+  name: http-app-s2i-build-and-deploy
+  annotations:
+    openshift.io/display-name: HTTP App S2I Build and Deploy
+    tags: s2i
+objects:
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    labels:
+      build: "${NAME}"
+      app: "${NAME}"
+    name: "${NAME}"
+  spec: {}
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    labels:
+      build: "${NAME}"
+      app: "${NAME}"
+    name: "${NAME}"
+  spec:
+    nodeSelector: 
+    output:
+      to:
+        kind: ImageStreamTag
+        name: "${NAME}:latest"
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      contextDir: "${SOURCE_CONTEXT_DIR}"
+      git:
+        ref: "${SOURCE_REPOSITORY_REF}"
+        uri: "${SOURCE_REPOSITORY_URL}"
+      type: Git
+    strategy:
+      sourceStrategy:
+        from:
+          kind: ImageStreamTag
+          name: "${S2I_BASE_IMAGE}"
+          namespace: openshift
+      type: Source
+    triggers:
+    - type: ConfigChange    
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      name: "${NAME}"
+      app: "${NAME}"
+    name: "${NAME}"
+  spec:
+    ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      deploymentconfig: "${NAME}"
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      app: ${NAME}
+    name: ${NAME}
+  spec:
+    replicas: 1
+    selector:
+      app: ${NAME}
+      deploymentconfig: ${NAME}
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: ${NAME}
+          deploymentconfig: ${NAME}
+      spec:
+        containers:
+        - image: ${NAME}
+          imagePullPolicy: Always
+          name: ${NAME}
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - ${NAME}
+        from:
+          kind: ImageStreamTag
+          name: ${NAME}:latest
+      type: ImageChange
+- apiVersion: v1
+  kind: Route
+  metadata:
+    labels:
+      app: ${NAME}
+      application: ${NAME}
+    name: ${NAME}
+  spec:
+    port:
+      targetPort: ${TARGET_PORT}
+    to:
+      kind: Service
+      name: ${NAME}
+      weight: 100
+    wildcardPolicy: None 
+parameters:
+- name: NAME
+  displayName: Name
+  description: The name assigned to all objects and the resulting imagestream.
+  required: true
+- name: SOURCE_REPOSITORY_URL
+  displayName: Git Repository URL
+  description: The URL of the repository with your Jenkinsfile.
+  required: true
+- name: SOURCE_REPOSITORY_REF
+  displayName: Git Reference
+  description: Set this to a branch name, tag or other ref of your repository if you are not using the default (master) branch.
+  value: master
+- name: SOURCE_CONTEXT_DIR
+  displayName: Git Context Directory for app build
+  description: Set this to the directory where the application source code is if not using the default root directory
+- name: S2I_BASE_IMAGE
+  displayName: S2I Base Image for Application
+  description: The base image for building the Application with S2I, including image tag
+  required: true
+  value: redhat-openjdk18-openshift:latest
+- description: The service port to route traffic.
+  displayName: target Port
+  name: TARGET_PORT
+  required: true
+  value: 8080-tcp  

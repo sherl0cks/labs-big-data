@@ -24,7 +24,9 @@
             "properties": {
                 "customer": "Red Hat IT",
                 "facilityType": "Red Hat",
-                "residencyType": "disrupt"
+                "residencyType": "disrupt",
+                "residencyFocus": "application development",
+                "technologies": "OpenShift, Vert.x, Angular, Jenkins, Ansible and SonarQube"
             },
             "geometry": {
                 "type": "Point",
@@ -54,7 +56,9 @@
             "properties": {
                 "customer": "A Health Care Entity",
                 "facilityType": "pop-up",
-                "residencyType": "disrupt"
+                "residencyType": "disrupt",
+                "residencyFocus": "application development",
+                "technologies": "OpenShift, Spring Boot, Vue.js, Jenkins and Ansible"
             },
             "geometry": {
                 "type": "Point",
@@ -69,7 +73,9 @@
             "properties": {
                 "customer": "EasierAG",
                 "facilityType": "Red Hat",
-                "residencyType": "disrupt"
+                "residencyType": "disrupt",
+                "residencyFocus": "application development",
+                "technologies": "OpenShift, Red Hat Mobile Application Platform, Ionic and Jenkins"
             },
             "geometry": {
                 "type": "Point",

@@ -4,6 +4,7 @@ openshift_cluster_content:
   content:
   - name: big-data-project
     template: "https://raw.githubusercontent.com/redhat-cop/cluster-lifecycle/master/files/projectrequest/template.yml"
+    template_action: create
     params: "{{ inventory_dir }}/../params/projectrequests/big-data"
     tags:
     - projects

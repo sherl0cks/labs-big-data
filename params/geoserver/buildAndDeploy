@@ -1,4 +1,4 @@
 NAME=geoserver
 SOURCE_REPOSITORY_URL=https://github.com/sherl0cks/labs-big-data
 SOURCE_CONTEXT_DIR=s2i-config/geoserver
-S2I_BASE_IMAGE=jboss-eap71-openshift:1.6
+S2I_BASE_IMAGE=jboss-eap70-openshift:1.6
